@@ -14,17 +14,19 @@ const width = doc.internal.pageSize.getWidth();
 const height = doc.internal.pageSize.getHeight();
 
 const Header = () => {
-  const [font, setFont] = useState('Homemade+Apple');
+  const [font, setFont] = useState('Homemade Apple');
 
   const dispatch = useContext(Dispatch);
 
   const googleFonts = "https://fonts.googleapis.com/css2"
 
   useEffect(() => { 
+    const cfont = font.split(' ').join('+')
+    setFont(cfont)
     dispatch({type:'SET_FONT', payload:{
       font
     }});
-  },[dispatch])
+  },[])
 
   const handleChange = (e: any) => {
     const currentFont = e.target.value.split(' ').join('+');
@@ -178,12 +180,12 @@ const Header = () => {
             sx={{
               width: "60px",
             }}
-            defaultValue="16px"
             onChange={handleSizeChange}
           >
             <option value="12px">12</option>
             <option value="16px">16</option>
             <option value="24px">24</option>
+            <option value="32px">32</option>
             <option value="64px">64</option>
             <option value="120px">120</option>
           </Select>
@@ -199,7 +201,7 @@ const Header = () => {
           </div>
           <Select
             sx={{
-              width: "100px",
+              width: "120px",
             }}
             defaultValue="Hello"
             onChange={handleColorChange}

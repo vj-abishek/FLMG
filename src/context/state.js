@@ -28,7 +28,7 @@ function countReducer(state, { type, payload }) {
     case "SET_SIZE": {
       return {
         ...state,
-        size: payload.size
+        fontSize: payload.size
       }
     }
     default: {
