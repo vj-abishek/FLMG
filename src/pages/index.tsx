@@ -14,6 +14,7 @@ const IndexPage = () => {
       <SEO title="Editor" />
       <Helmet>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script>
       </Helmet>
       <div
         id="editor"
@@ -22,7 +23,7 @@ const IndexPage = () => {
           display: "flex",
           justifyContent: "center",
           mt: "3",
-          fontFamily: `'${state.fontFamily}', cursive`,
+          fontFamily: `'${state?.fontFamily || 'Homemade Apple'}', cursive`,
         }}
       >
         <Page />

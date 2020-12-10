@@ -1,22 +1,23 @@
 /** @jsx jsx */
 import { jsx, Select, Slider, Input } from "theme-ui"
 import html2canvas from 'html2canvas';
-import { jsPDF } from "jspdf";
+// import { jsPDF } from "jspdf";
 import { Fragment, useContext, useEffect, useState } from "react"
 import {Helmet} from 'react-helmet'
 import Image from "./image"
-import {Dispatch} from '../context/state'
-import "fawn-components/lib/fn-pwa-btn"
+import {Dispatch, State} from '../context/state'
+// import "fawn-components/lib/fn-pwa-btn"
 
-const doc =  new jsPDF("p", "mm", "a4");
+// const doc =  new jsPDF("p", "mm", "a4");
 
-const width = doc.internal.pageSize.getWidth();
-const height = doc.internal.pageSize.getHeight();
+// const width = doc.internal.pageSize.getWidth();
+// const height = doc.internal.pageSize.getHeight();
 
 const Header = () => {
   const [font, setFont] = useState('Homemade Apple');
 
   const dispatch = useContext(Dispatch);
+  const state = useContext(State);
 
   const googleFonts = "https://fonts.googleapis.com/css2"
 
@@ -36,22 +37,37 @@ const Header = () => {
     }});
   }
 
-  const handleColorChange = (e: any) =>{
+  const handleColorChange = (e: any) => {
     dispatch({type:'SET_COLOR', payload:{
       color: e.target.value,
     }})
   }
-  const handleSizeChange = (e: any) =>{
+  const handleSizeChange = (e: any) => {
     dispatch({type:'SET_SIZE', payload:{
       size: e.target.value,
     }})
   }
+
+  const convertToPdf = () => {
+    html2canvas(document.querySelector("#page1")).then(canvas => {
+      const image = canvas.toDataURL();
+      const a = document.createElement('a')
+      a.href = image
+      a.setAttribute('download', `${state.docName}.png`);
+      a.click();
+      // doc.addImage(image, "PNG", 0,0, width, height);
+      // console.log(image);
+      // doc.save(`${state.docName}.pdf`);
+  });
+}
   return(
     <Fragment>
       {font && (
         <Helmet>
           <link rel="preconnect" href="https://fonts.gstatic.com"/>
           <link href={`${googleFonts}?family=${font}&display=swap`} rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script>
+
         </Helmet>
       )}
       <header
@@ -122,13 +138,13 @@ const Header = () => {
                 Share
               </div>
             </div>
-            <fn-pwa-btn
+            {/* <fn-pwa-btn
               title="Install PWA"
               size="40px"
               background="#14213d"
               value="Install"
               testing
-            ></fn-pwa-btn>
+            ></fn-pwa-btn> */}
           </div>
         </div>
       </header>
@@ -219,14 +235,7 @@ const Header = () => {
             }}
           />
           <div
-          onClick={() => {
-                  html2canvas(document.querySelector("#page1")).then(canvas => {
-                    const image = canvas.toDataURL();
-                    doc.addImage(image, "PNG", 0,0, width, height);
-                    console.log(image);
-                    doc.save();
-                });
-                }}
+          onClick={convertToPdf}
             sx={{
               width: "auto",
               height: "40px",

@@ -47,8 +47,8 @@ export default function Page() {
                 height: '100%',
                 padding: '10px',
                 borderRadius:'1px',
-                fontSize: state.fontSize,
-                color: state.color,
+                fontSize: state?.fontSize || '16px',
+                color: state?.color || '#21abcd',
             }}>
                 <Editor ref={EditorRef}
                  editorState={editorState} 
