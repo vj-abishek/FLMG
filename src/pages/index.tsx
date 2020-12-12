@@ -33,7 +33,7 @@ const IndexPage = () => {
           fontFamily: `'${state?.fontFamily || "Caveat"}', cursive`,
         }}
       >
-        {state.page.map((_, i) => (
+        {state && state.page.map((_, i) => (
           <Page key={i} index={i}/>
         ))}
         <button
