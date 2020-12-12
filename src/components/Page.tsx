@@ -73,14 +73,14 @@ export default function Page({ index }) {
     <div
       id={`page${index + 1}`}
       data-index={index + 1}
-      onChange={handleChange}
+      onFocus={handleChange}
       ref={pageRef}
       onClick={() => {
         EditorRef?.current.focus()
       }}
       sx={{
-        width: "595.28px",
-        height: "841.89px",
+        width: ["100vw", "819px","819px"],
+        height: "968px",
         backgroundColor: "#fff",
         padding: "1.7rem",
         position: "relative",
@@ -88,12 +88,12 @@ export default function Page({ index }) {
       }}
     >
       <div
-        onKeyPress={handleKeypress}
+        onInput={handleKeypress}
+        onPaste={handleKeypress}
         ref={pageElement}
         sx={{
           border: "1px solid #5c6274",
           height: "100%",
-          maxHeight:'calc(841.89px - 10px)',
           padding: "10px",
           borderRadius: "1px",
           fontSize: state?.fontSize || "16px",
@@ -101,6 +101,9 @@ export default function Page({ index }) {
         }}
       >
         <Editor
+          sx={{
+            maxHeight:'calc(841.89px - 10px)',
+          }}
           ref={EditorRef}
           editorState={editorState}
           plugins={plugins}
@@ -109,6 +112,7 @@ export default function Page({ index }) {
         <InlineToolbar />
         <SideToolbar />
       </div>
+  
     </div>
   )
 }
