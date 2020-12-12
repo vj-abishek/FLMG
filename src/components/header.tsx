@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, Select, Slider, Input } from "theme-ui"
 import html2canvas from 'html2canvas';
-// import { jsPDF } from "jspdf";
+// import { jsPDF } from "jspdf/dist/jspdf.node.js";
 import { Fragment, useContext, useEffect, useState } from "react"
 import {Helmet} from 'react-helmet'
 import Image from "./image"
@@ -66,8 +66,6 @@ const Header = () => {
         <Helmet>
           <link rel="preconnect" href="https://fonts.gstatic.com"/>
           <link href={`${googleFonts}?family=${font}&display=swap`} rel="stylesheet"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script>
-
         </Helmet>
       )}
       <header
