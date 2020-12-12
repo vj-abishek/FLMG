@@ -54,7 +54,7 @@ const Layout: FC<DataProp> = ({ children }) => {
             fontSize: "12px",
           }}
         >
-          <div>Page {state.currentPage} of {state.page.length}</div>
+          <div>Page {state?.currentPage || 1} of {state?.page.length || 1}</div>
         </div>
         <div
           sx={{
