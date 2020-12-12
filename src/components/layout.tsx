@@ -7,8 +7,8 @@
 
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { Fragment, FC } from "react"
-
+import { FC, useContext } from "react"
+import {State} from '../context/state'
 import Header from "./header"
 import "./layout.css"
 
@@ -17,8 +17,9 @@ type DataProp = {
 }
 
 const Layout: FC<DataProp> = ({ children }) => {
+  const state = useContext(State)
   return (
-    <Fragment>
+    <div>
       <Header />
       <div
         style={{
@@ -53,14 +54,7 @@ const Layout: FC<DataProp> = ({ children }) => {
             fontSize: "12px",
           }}
         >
-          <div>Page 1 of 1</div>
-          <div
-            sx={{
-              ml: "1",
-            }}
-          >
-            0 word
-          </div>
+          <div>Page {state.currentPage} of {state.page.length}</div>
         </div>
         <div
           sx={{
@@ -71,7 +65,7 @@ const Layout: FC<DataProp> = ({ children }) => {
           <a href="https://twitter.com/@abishek_py">@abishek_py</a>
         </div>
       </footer>
-    </Fragment>
+    </div>
   )
 }
 

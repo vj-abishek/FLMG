@@ -1,11 +1,10 @@
 /** @jsx jsx */
-import { jsx, Select, Slider, Input } from "theme-ui"
-import html2canvas from 'html2canvas';
-// import { jsPDF } from "jspdf/dist/jspdf.node.js";
-import { Fragment, useContext, useEffect, useState } from "react"
-import {Helmet} from 'react-helmet'
+import { jsx, Select, Slider, Input, Styled } from "theme-ui"
+import html2canvas from "html2canvas"
+import {  useContext, useEffect, useState } from "react"
+import { Helmet } from "react-helmet"
 import Image from "./image"
-import {Dispatch, State} from '../context/state'
+import { Dispatch, State } from "../context/state"
 // import "fawn-components/lib/fn-pwa-btn"
 
 // const doc =  new jsPDF("p", "mm", "a4");
@@ -14,58 +13,139 @@ import {Dispatch, State} from '../context/state'
 // const height = doc.internal.pageSize.getHeight();
 
 const Header = () => {
-  const [font, setFont] = useState('Homemade Apple');
+  const [font, setFont] = useState("Caveat")
+  const [overlay, setOverlay] = useState(false)
 
-  const dispatch = useContext(Dispatch);
-  const state = useContext(State);
+  const dispatch = useContext(Dispatch)
+  const state = useContext(State)
 
   const googleFonts = "https://fonts.googleapis.com/css2"
 
-  useEffect(() => { 
-    const cfont = font.split(' ').join('+')
+  useEffect(() => {
+    const cfont = font.split(" ").join("+")
     setFont(cfont)
-    dispatch({type:'SET_FONT', payload:{
-      font
-    }});
-  },[])
+    dispatch({
+      type: "SET_FONT",
+      payload: {
+        font,
+      },
+    })
+  }, [])
 
   const handleChange = (e: any) => {
-    const currentFont = e.target.value.split(' ').join('+');
-    setFont(currentFont);
-    dispatch({type:'SET_FONT', payload:{
-      font:e.target.value 
-    }});
+    const currentFont = e.target.value.split(" ").join("+")
+    setFont(currentFont)
+    dispatch({
+      type: "SET_FONT",
+      payload: {
+        font: e.target.value,
+      },
+    })
   }
 
   const handleColorChange = (e: any) => {
-    dispatch({type:'SET_COLOR', payload:{
-      color: e.target.value,
-    }})
+    dispatch({
+      type: "SET_COLOR",
+      payload: {
+        color: e.target.value,
+      },
+    })
   }
   const handleSizeChange = (e: any) => {
-    dispatch({type:'SET_SIZE', payload:{
-      size: e.target.value,
+    dispatch({
+      type: "SET_SIZE",
+      payload: {
+        size: e.target.value,
+      },
+    })
+  }
+
+  const handleInputChange = (e: any) => {
+    dispatch({type:'SET_NAME', payload: {
+      name: e.target.value,
     }})
   }
 
   const convertToPdf = () => {
-    html2canvas(document.querySelector("#page1")).then(canvas => {
-      const image = canvas.toDataURL();
-      const a = document.createElement('a')
-      a.href = image
-      a.setAttribute('download', `${state.docName}.png`);
-      a.click();
-      // doc.addImage(image, "PNG", 0,0, width, height);
-      // console.log(image);
-      // doc.save(`${state.docName}.pdf`);
-  });
-}
-  return(
-    <Fragment>
+    setOverlay(true)
+
+    state.page.forEach((_, i) => {
+      html2canvas(document.querySelector(`#page${i + 1}`)).then(canvas => {
+        const image = canvas.toDataURL();
+        const a = document.createElement('a')
+        a.href = image
+        a.setAttribute('download', `${state.docName + i}.png`);
+        a.click();
+    });
+    })
+  }
+  return (
+    <div>
+     {overlay && (
+        <div  
+        onClick={() => {
+          setOverlay(false)
+        }}
+        sx={{
+          position:'fixed',
+          top:'0px',
+          left:'0px',
+          width:'100vw',
+          height:'100vh',
+          zIndex:3,
+          backgroundColor:'rgba(0,0,0,0.4)'
+        }}/>
+     )}
+     {overlay && (
+        <div sx={{
+          p:'3',
+          position:'fixed',
+          left:'50%',
+          borderRadius:'5px',
+          top:'50%',
+          zIndex:'4',
+          transform:'translate(-50%, -50%)',
+          fontFamily: 'Segoe UI,system-ui,-apple-system,sans-serif',
+          background:'#fff',
+          boxShadow:'4px 6px 8px rgba(0,0,0,0.1)',
+          display:'flex',
+          alignItems:'center',
+          justifyContent:'center',
+          flexDirection:'column',
+        }}>
+          <img src="https://icons.iconarchive.com/icons/google/noto-emoji-activities/1024/52707-party-popper-icon.png"
+           alt="Downloaded successfully" sx={{
+             width:"80px",
+             height:"80px"
+           }}/>
+           <Styled.h3>Downloaded, what's next?</Styled.h3>
+           
+           <ul>
+             <li>You need to combine those images, you can use any software </li>
+             <li>Here are couple of online convertor</li>
+             <li><a href="https://www.ilovepdf.com/jpg_to_pdf">ilovepdf.com</a> <a href="https://jpg2pdf.com/">jpg2pdf.com</a></li>
+           </ul>
+           <button 
+           onClick={() => {
+             setOverlay(false)
+           }}
+           sx={{
+             backgroundColor:'primary',
+             p:'6px 24px',
+             borderRadius:'16px',
+             cursor:'pointer',
+             boxShadow:'3px 6px 9px rgba(0,0,0,0.1)',
+             border:'1px solid transparent'
+           }}>Got it</button>
+        </div>
+     )}
       {font && (
         <Helmet>
-          <link rel="preconnect" href="https://fonts.gstatic.com"/>
-          <link href={`${googleFonts}?family=${font}&display=swap`} rel="stylesheet"/>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href={`${googleFonts}?family=${font}&display=swap`}
+            rel="stylesheet"
+          />
         </Helmet>
       )}
       <header
@@ -136,13 +216,6 @@ const Header = () => {
                 Share
               </div>
             </div>
-            {/* <fn-pwa-btn
-              title="Install PWA"
-              size="40px"
-              background="#14213d"
-              value="Install"
-              testing
-            ></fn-pwa-btn> */}
           </div>
         </div>
       </header>
@@ -174,9 +247,9 @@ const Header = () => {
             }}
             onChange={handleChange}
           >
+            <option>Caveat</option>
             <option>Homemade Apple</option>
             <option>Indie Flower</option>
-            <option>Caveat</option>
             <option>Patrick Hand</option>
             <option>Nothing You Could Do</option>
             <option>Leckerli One</option>
@@ -210,18 +283,17 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            <div>Letter Spacing</div>
-            <Slider defaultValue={25} />
+            {/* <div>Letter Spacing</div>
+            <Slider defaultValue={25} /> */}
           </div>
           <Select
             sx={{
               width: "120px",
             }}
-            defaultValue="Hello"
             onChange={handleColorChange}
           >
-            <option value="#002b59">Blue pen (dark)</option>
             <option value="#16264c">Blue pen</option>
+            <option value="#383b3e">Black pen</option>
             <option value="#21abcd">Gel pen</option>
             <option value="#3c4a85">Fountain pen</option>
             <option value="#00C891">green pen</option>
@@ -231,9 +303,10 @@ const Header = () => {
             sx={{
               width: "150px",
             }}
+            onChange={handleInputChange}
           />
           <div
-          onClick={convertToPdf}
+            onClick={convertToPdf}
             sx={{
               width: "auto",
               height: "40px",
@@ -252,7 +325,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </div>
   )
 }
 

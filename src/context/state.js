@@ -9,6 +9,8 @@ const initialState = {
   inkType: "#21abcd",
   fontSize: "16px",
   docName: "FLMG",
+  page: [1],
+  currentPage: 1,
 }
 
 function countReducer(state, { type, payload }) {
@@ -31,6 +33,22 @@ function countReducer(state, { type, payload }) {
         fontSize: payload.size
       }
     }
+    case 'SET_NAME': {
+      return {
+        ...state,
+        docName: payload.name,
+      }
+    }
+    case 'ADD_PAGE':
+      return {
+        ...state,
+        page: [...state.page, 1]
+      }
+    case 'SET_CURRENT_PAGE':
+      return {
+        ...state,
+        currentPage: payload.current,
+      }
     default: {
       throw new Error(`Unhandled action type: ${type}`)
     }
