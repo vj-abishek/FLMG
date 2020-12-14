@@ -6,6 +6,7 @@ import SEO from "../components/seo"
 import { Dispatch, State } from "../context/state"
 import { Helmet } from "react-helmet"
 import Page from "../components/Page"
+import '../Styles/print.css'
 
 const IndexPage = () => {
   const state = useContext(State)
@@ -19,7 +20,6 @@ const IndexPage = () => {
       <SEO title="Editor" />
       <Helmet>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.2.0/jspdf.umd.min.js"></script>
       </Helmet>
       <div
         id="editor"
@@ -37,6 +37,7 @@ const IndexPage = () => {
           <Page key={i} index={i}/>
         ))}
         <button
+          className="no-print"
           onClick={handleClick}
           sx={{
             backgroundColor: "primary",
@@ -59,6 +60,7 @@ const IndexPage = () => {
       </div>
 
       <div
+      className="no-print"
         sx={{
           paddingTop: "30px",
         }}

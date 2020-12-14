@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Select, Slider, Input, Styled } from "theme-ui"
+import { jsx, Select,  Input, Styled } from "theme-ui"
 import html2canvas from "html2canvas"
 import {  useContext, useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
@@ -61,15 +61,19 @@ const Header = () => {
   }
 
   const handleInputChange = (e: any) => {
+    if(typeof document !== 'undefined'){
+      document.title = e.target.value
+    }
     dispatch({type:'SET_NAME', payload: {
       name: e.target.value,
     }})
   }
 
-  const convertToPdf = () => {
+  const setoverlay = () => {
     setOverlay(true)
-
-    state.page.forEach((_, i) => {
+  }
+  const convertToImage = () => {
+     state.page.forEach((_, i) => {
       html2canvas(document.querySelector(`#page${i + 1}`)).then(canvas => {
         const image = canvas.toDataURL();
         const a = document.createElement('a')
@@ -78,11 +82,13 @@ const Header = () => {
         a.click();
     });
     })
+    setOverlay(false)
   }
   return (
-    <div>
+    <div className="no-print">
      {overlay && (
         <div  
+        className="no-print"
         onClick={() => {
           setOverlay(false)
         }}
@@ -97,7 +103,7 @@ const Header = () => {
         }}/>
      )}
      {overlay && (
-        <div sx={{
+        <div className="no-print" sx={{
           p:'3',
           position:'fixed',
           left:'50%',
@@ -113,30 +119,23 @@ const Header = () => {
           justifyContent:'center',
           flexDirection:'column',
         }}>
-          <img src="https://icons.iconarchive.com/icons/google/noto-emoji-activities/1024/52707-party-popper-icon.png"
-           alt="Downloaded successfully" sx={{
-             width:"80px",
-             height:"80px"
-           }}/>
-           <Styled.h3>Downloaded, what's next?</Styled.h3>
-           
-           <ul>
-             <li>You need to combine those images, you can use any software </li>
-             <li>Here are couple of online convertor</li>
-             <li><a href="https://www.ilovepdf.com/jpg_to_pdf">ilovepdf.com</a> <a href="https://jpg2pdf.com/">jpg2pdf.com</a></li>
-           </ul>
-           <button 
-           onClick={() => {
-             setOverlay(false)
-           }}
-           sx={{
-             backgroundColor:'primary',
-             p:'6px 24px',
-             borderRadius:'16px',
-             cursor:'pointer',
-             boxShadow:'3px 6px 9px rgba(0,0,0,0.1)',
-             border:'1px solid transparent'
-           }}>Got it</button>
+           <h3 sx={{
+             mb:3
+           }}>Save as:</h3>
+           <div sx={{
+             display: 'flex',
+             justifyContent:'center',
+             flexDirection:'row',
+             gap:'2'
+           }}>
+           <button onClick={convertToImage}>PNG image</button>
+           <button onClick={() => {
+             if(typeof window !== 'undefined'){
+              window.print()
+              setOverlay(false)
+             }
+           }}>PDF Document</button>
+           </div>
         </div>
      )}
       {font && (
@@ -306,7 +305,7 @@ const Header = () => {
             onChange={handleInputChange}
           />
           <div
-            onClick={convertToPdf}
+            onClick={setoverlay}
             sx={{
               width: "auto",
               height: "40px",

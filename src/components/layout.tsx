@@ -22,6 +22,7 @@ const Layout: FC<DataProp> = ({ children }) => {
     <div>
       <Header />
       <div
+        className="no-padding"
         style={{
           margin: `0 auto`,
           maxWidth: 960,
@@ -30,7 +31,8 @@ const Layout: FC<DataProp> = ({ children }) => {
       >
         <main>{children}</main>
       </div>
-      <footer
+      <footer 
+        className="no-print"
         sx={{
           position: "fixed",
           maxWidth: "100vw",

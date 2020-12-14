@@ -1,0 +1,20 @@
+@media print{    
+    .no-print, .no-print *{
+        display: none !important;
+    }
+    @page { 
+        size: A4; /* DIN A4 standard, Europe */
+        margin:0;
+     }
+
+    #editor{
+        margin-top:0;
+    }
+    .no-border{
+        border:0px;
+    }
+    .no-padding{
+        padding:0px !important;
+    }
+
+}

@@ -78,13 +78,15 @@ export default function Page({ index }) {
       onClick={() => {
         EditorRef?.current.focus()
       }}
+      className="no-border"
       sx={{
-        width: ["100vw", "819px","819px"],
-        height: "968px",
+        width: "816px",
+        height: "1138px",
         backgroundColor: "#fff",
         padding: "1.7rem",
         position: "relative",
-        mt:1,
+        border:'1px solid #ababab',
+        pageBreakAfter: 'always',
       }}
     >
       <div
@@ -101,7 +103,7 @@ export default function Page({ index }) {
         }}
       >
         <Editor
-          sx={{
+          style={{
             maxHeight:'calc(841.89px - 10px)',
           }}
           ref={EditorRef}
