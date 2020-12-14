@@ -99,7 +99,8 @@ const Header = () => {
           width:'100vw',
           height:'100vh',
           zIndex:3,
-          backgroundColor:'rgba(0,0,0,0.4)'
+          backgroundColor:'rgba(0,0,0,0.3)',
+          backdropFilter:'blur(4px)'
         }}/>
      )}
      {overlay && (
