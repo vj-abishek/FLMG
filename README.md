@@ -5,7 +5,7 @@
   For Last Minute Guys (FLMG)
 </h1>
 <p align="center">
-Generates images or pdf from the text
+Editor For Last Minute Guys, generates images or pdf from the text
 </p>
 
 <p align="center">
