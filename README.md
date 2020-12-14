@@ -1,5 +1,7 @@
 <p align="center">
-    <img alt="Gatsby" src="./src/images/gatsby-icon.png" width="120" />
+    <a href="https://flmg.now.sh">
+     <img alt="Gatsby" src="./src/images/gatsby-icon.png" width="120" />
+    </a>
 </p>
 <h1 align="center">
   For Last Minute Guys (FLMG)
@@ -9,7 +11,9 @@ Editor For Last Minute Guys, generates images or pdf from the text
 </p>
 
 <p align="center">
-    <img alt="Gatsby" src="./src/images/Banner.jpg" width="600" />
+     <a href="https://flmg.now.sh">
+       <img alt="Gatsby" src="./src/images/Banner.jpg" width="600" />
+    </a>
 </p>
 
 ## 🚀 Quick start
