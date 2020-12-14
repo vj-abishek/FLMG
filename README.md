@@ -1,13 +1,14 @@
 <p align="center">
   <a href="https://www.gatsbyjs.com">
-    <img alt="Gatsby" src="./src/images/gatsby-icon.png" width="90" />
+    <img alt="Gatsby" src="./src/images/gatsby-icon.png" width="120" />
   </a>
 </p>
 <h1 align="center">
   For Last Minute Guys (FLMG)
 </h1>
-
+<p align="center">
 Generates images or pdf from the text
+</p>
 
 <p align="center">
   <a href="https://www.gatsbyjs.com">
