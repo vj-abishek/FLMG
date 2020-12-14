@@ -1,7 +1,5 @@
 <p align="center">
-  <a href="https://www.gatsbyjs.com">
     <img alt="Gatsby" src="./src/images/gatsby-icon.png" width="120" />
-  </a>
 </p>
 <h1 align="center">
   For Last Minute Guys (FLMG)
@@ -11,9 +9,7 @@ Generates images or pdf from the text
 </p>
 
 <p align="center">
-  <a href="https://www.gatsbyjs.com">
     <img alt="Gatsby" src="./src/images/Banner.jpg" width="600" />
-  </a>
 </p>
 ## 🚀 Quick start
 
