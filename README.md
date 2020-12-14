@@ -14,7 +14,7 @@ Generates images or pdf from the text
 
 ## 🚀 Quick start
 
-1.  **Clone repo*
+1.  **Clone repo.**
 
    
     ```shell
