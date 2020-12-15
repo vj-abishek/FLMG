@@ -30,6 +30,7 @@
     "theme-ui": "^0.3.4"
   },
   "devDependencies": {
+    "@types/draft-js": "^0.10.44",
     "@types/react-helmet": "^6.1.0",
     "prettier": "2.1.2"
   },

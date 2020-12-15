@@ -1,10 +1,16 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import Editor from "draft-js-plugins-editor"
-import { EditorState } from "draft-js"
+import {
+  EditorState,
+  Modifier,
+  getDefaultKeyBinding,
+  DraftHandleValue,
+  KeyBindingUtil,
+} from "draft-js"
 import createInlineToolbarPlugin from "draft-js-inline-toolbar-plugin"
 import createSideToolbarPlugin from "draft-js-side-toolbar-plugin"
-import { useContext, useEffect, useRef, useState } from "react"
+import {  useContext, useEffect, useRef, useState } from "react"
 import "draft-js-inline-toolbar-plugin/lib/plugin.css"
 import "draft-js-side-toolbar-plugin/lib/plugin.css"
 import { Dispatch, State } from "../context/state"
@@ -69,6 +75,43 @@ export default function Page({ index }) {
     })
   }
 
+  function tabKeyBindingFn(e: any): string | null {
+    const {hasCommandModifier} = KeyBindingUtil
+    if (e.keyCode === 9) {
+      return "tab"
+    }
+
+    if (e.keyCode === 83 /* `S` key */ && hasCommandModifier(e) /* + `Ctrl` key */) {
+      return 'save';
+    }
+
+    return getDefaultKeyBinding(e)
+  }
+
+  const handleTab = (command: string): DraftHandleValue => {
+    if (command === "tab") {
+      const tabCharacter = "    "
+      let currentState = editorState
+      let newContentState = Modifier.replaceText(
+        currentState.getCurrentContent(),
+        currentState.getSelection(),
+        tabCharacter
+      )
+
+      setEditorState(
+        EditorState.push(currentState, newContentState, "insert-characters")
+      )
+      return "handled"
+    }
+
+    if(command === "save"){
+      document.getElementById('save').click();
+    }
+
+    return "not-handled"
+  }
+
+  console.log(state)
   return (
     <div
       id={`page${index + 1}`}
@@ -85,12 +128,12 @@ export default function Page({ index }) {
         backgroundColor: "#fff",
         padding: "1.7rem",
         position: "relative",
-        border:'1px solid #ababab',
-        pageBreakAfter: 'always',
+        border: "1px solid #ababab",
+        pageBreakAfter: "always",
       }}
     >
       <div
-        onInput={handleKeypress}
+        onKeyUp={handleKeypress}
         onPaste={handleKeypress}
         ref={pageElement}
         sx={{
@@ -100,21 +143,20 @@ export default function Page({ index }) {
           borderRadius: "1px",
           fontSize: state?.fontSize || "16px",
           color: state?.color || "#21abcd",
+          lineHeight: state?.lineHeight || '1',
         }}
       >
         <Editor
-          style={{
-            maxHeight:'calc(841.89px - 10px)',
-          }}
           ref={EditorRef}
           editorState={editorState}
           plugins={plugins}
           onChange={setEditorState}
+          handleKeyCommand={handleTab}
+          keyBindingFn={tabKeyBindingFn}
         />
         <InlineToolbar />
         <SideToolbar />
       </div>
-  
     </div>
   )
 }

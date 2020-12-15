@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Select,  Input, Styled } from "theme-ui"
+import { jsx, Select,  Input, Slider } from "theme-ui"
 import html2canvas from "html2canvas"
 import {  useContext, useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
@@ -280,11 +280,15 @@ const Header = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
             }}
           >
-            {/* <div>Letter Spacing</div>
-            <Slider defaultValue={25} /> */}
+            <div>Line height</div>
+            <Slider min="1" max="15" onChange={(e) => {
+
+              const range = e.target.value;
+              console.log(range)
+              dispatch({type:"SET_LINE_HEIGHT", payload:range})
+            }} defaultValue={0} />
           </div>
           <Select
             sx={{
@@ -306,6 +310,7 @@ const Header = () => {
             onChange={handleInputChange}
           />
           <div
+            id="save"
             onClick={setoverlay}
             sx={{
               width: "auto",

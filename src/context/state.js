@@ -11,6 +11,7 @@ const initialState = {
   docName: "FLMG",
   page: [1],
   currentPage: 1,
+  lineHeight: '1',
 }
 
 function countReducer(state, { type, payload }) {
@@ -39,6 +40,13 @@ function countReducer(state, { type, payload }) {
         docName: payload.name,
       }
     }
+    case 'SET_LINE_HEIGHT': {
+      return {
+        ...state,
+        lineHeight: payload
+      }
+    }
+
     case 'ADD_PAGE':
       return {
         ...state,
