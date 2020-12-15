@@ -111,7 +111,6 @@ export default function Page({ index }) {
     return "not-handled"
   }
 
-  console.log(state)
   return (
     <div
       id={`page${index + 1}`}
