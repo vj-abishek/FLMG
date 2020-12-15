@@ -3,6 +3,20 @@ const client = new fauna.Client({ secret: process.env.API_KEY })
 
 const { Get, Index } = fauna.query
 
+const GetDocs = (id) => {
+
+}
+
+const PostDocs = (docs) => {
+
+}
+
 module.exports = (req, res) => {
-    res.send('Hello world')
+    if (req.method === "GET") {
+
+    }
+
+    if (req.method === "POST") {
+
+    }
 }
