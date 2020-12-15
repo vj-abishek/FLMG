@@ -20,9 +20,8 @@ Editor For Last Minute Guys, generates images or pdf from the text
 
 1.  **Clone repo.**
 
-   
     ```shell
-    npm install -g gatsby-cli 
+    npm install -g gatsby-cli
     npm install
     ```
 

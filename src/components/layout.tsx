@@ -8,7 +8,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { FC, useContext } from "react"
-import {State} from '../context/state'
+import { State } from "../context/state"
 import Header from "./header"
 import "./layout.css"
 
@@ -31,7 +31,7 @@ const Layout: FC<DataProp> = ({ children }) => {
       >
         <main>{children}</main>
       </div>
-      <footer 
+      <footer
         className="no-print"
         sx={{
           position: "fixed",
@@ -56,7 +56,9 @@ const Layout: FC<DataProp> = ({ children }) => {
             fontSize: "12px",
           }}
         >
-          <div>Page {state?.currentPage || 1} of {state?.page.length || 1}</div>
+          <div>
+            Page {state?.currentPage || 1} of {state?.page.length || 1}
+          </div>
         </div>
         <div
           sx={{

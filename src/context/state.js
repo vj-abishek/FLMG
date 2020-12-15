@@ -11,7 +11,7 @@ const initialState = {
   docName: "FLMG",
   page: [1],
   currentPage: 1,
-  lineHeight: '1',
+  lineHeight: "1",
 }
 
 function countReducer(state, { type, payload }) {
@@ -19,40 +19,40 @@ function countReducer(state, { type, payload }) {
     case "SET_FONT": {
       return {
         ...state,
-        fontFamily: payload.font
+        fontFamily: payload.font,
       }
     }
     case "SET_COLOR": {
       return {
         ...state,
-        color: payload.color
+        color: payload.color,
       }
     }
     case "SET_SIZE": {
       return {
         ...state,
-        fontSize: payload.size
+        fontSize: payload.size,
       }
     }
-    case 'SET_NAME': {
+    case "SET_NAME": {
       return {
         ...state,
         docName: payload.name,
       }
     }
-    case 'SET_LINE_HEIGHT': {
+    case "SET_LINE_HEIGHT": {
       return {
         ...state,
-        lineHeight: payload
+        lineHeight: payload,
       }
     }
 
-    case 'ADD_PAGE':
+    case "ADD_PAGE":
       return {
         ...state,
-        page: [...state.page, 1]
+        page: [...state.page, 1],
       }
-    case 'SET_CURRENT_PAGE':
+    case "SET_CURRENT_PAGE":
       return {
         ...state,
         currentPage: payload.current,

@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 import { Dispatch, State } from "../context/state"
 import { Helmet } from "react-helmet"
 import Page from "../components/Page"
-import '../Styles/print.css'
+import "../Styles/print.css"
 
 const IndexPage = () => {
   const state = useContext(State)
@@ -33,9 +33,7 @@ const IndexPage = () => {
           fontFamily: `'${state?.fontFamily || "Caveat"}', cursive`,
         }}
       >
-        {state && state.page.map((_, i) => (
-          <Page key={i} index={i}/>
-        ))}
+        {state && state.page.map((_, i) => <Page key={i} index={i} />)}
         <button
           className="no-print"
           onClick={handleClick}
@@ -60,7 +58,7 @@ const IndexPage = () => {
       </div>
 
       <div
-      className="no-print"
+        className="no-print"
         sx={{
           paddingTop: "30px",
         }}

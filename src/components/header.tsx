@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, Select,  Input, Slider } from "theme-ui"
+import { jsx, Select, Input, Slider } from "theme-ui"
 import html2canvas from "html2canvas"
-import {  useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import Image from "./image"
 import { Dispatch, State } from "../context/state"
@@ -61,84 +61,101 @@ const Header = () => {
   }
 
   const handleInputChange = (e: any) => {
-    if(typeof document !== 'undefined'){
+    if (typeof document !== "undefined") {
       document.title = e.target.value
     }
-    dispatch({type:'SET_NAME', payload: {
-      name: e.target.value,
-    }})
+    dispatch({
+      type: "SET_NAME",
+      payload: {
+        name: e.target.value,
+      },
+    })
   }
 
   const setoverlay = () => {
     setOverlay(true)
   }
   const convertToImage = () => {
-     state.page.forEach((_, i) => {
+    state.page.forEach((_, i) => {
       html2canvas(document.querySelector(`#page${i + 1}`)).then(canvas => {
-        const image = canvas.toDataURL();
-        const a = document.createElement('a')
+        const image = canvas.toDataURL()
+        const a = document.createElement("a")
         a.href = image
-        a.setAttribute('download', `${state.docName + i}.png`);
-        a.click();
-    });
+        a.setAttribute("download", `${state.docName + i}.png`)
+        a.click()
+      })
     })
     setOverlay(false)
   }
   return (
     <div className="no-print">
-     {overlay && (
-        <div  
-        className="no-print"
-        onClick={() => {
-          setOverlay(false)
-        }}
-        sx={{
-          position:'fixed',
-          top:'0px',
-          left:'0px',
-          width:'100vw',
-          height:'100vh',
-          zIndex:3,
-          backgroundColor:'rgba(0,0,0,0.3)',
-          backdropFilter:'blur(4px)'
-        }}/>
-     )}
-     {overlay && (
-        <div className="no-print" sx={{
-          p:'3',
-          position:'fixed',
-          left:'50%',
-          borderRadius:'5px',
-          top:'50%',
-          zIndex:'4',
-          transform:'translate(-50%, -50%)',
-          fontFamily: 'Segoe UI,system-ui,-apple-system,sans-serif',
-          background:'#fff',
-          boxShadow:'4px 6px 8px rgba(0,0,0,0.1)',
-          display:'flex',
-          alignItems:'center',
-          justifyContent:'center',
-          flexDirection:'column',
-        }}>
-           <h3 sx={{
-             mb:3
-           }}>Save as:</h3>
-           <div sx={{
-             display: 'flex',
-             justifyContent:'center',
-             flexDirection:'row',
-             gap:'2'
-           }}>
-           <button onClick={convertToImage}>PNG image</button>
-           <button onClick={() => {
-             if(typeof window !== 'undefined'){
-              window.print()
-              setOverlay(false)
-             }
-           }}>PDF Document</button>
-           </div>
+      {overlay && (
+        <div
+          className="no-print"
+          onClick={() => {
+            setOverlay(false)
+          }}
+          sx={{
+            position: "fixed",
+            top: "0px",
+            left: "0px",
+            width: "100vw",
+            height: "100vh",
+            zIndex: 3,
+            backgroundColor: "rgba(0,0,0,0.3)",
+            backdropFilter: "blur(4px)",
+          }}
+        />
+      )}
+      {overlay && (
+        <div
+          className="no-print"
+          sx={{
+            p: "3",
+            position: "fixed",
+            left: "50%",
+            borderRadius: "5px",
+            top: "50%",
+            zIndex: "4",
+            transform: "translate(-50%, -50%)",
+            fontFamily: "Segoe UI,system-ui,-apple-system,sans-serif",
+            background: "#fff",
+            boxShadow: "4px 6px 8px rgba(0,0,0,0.1)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <h3
+            sx={{
+              mb: 3,
+            }}
+          >
+            Save as:
+          </h3>
+          <div
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "row",
+              gap: "2",
+            }}
+          >
+            <button onClick={convertToImage}>PNG image</button>
+            <button
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  window.print()
+                  setOverlay(false)
+                }
+              }}
+            >
+              PDF Document
+            </button>
+          </div>
         </div>
-     )}
+      )}
       {font && (
         <Helmet>
           <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -283,12 +300,16 @@ const Header = () => {
             }}
           >
             <div>Line height</div>
-            <Slider min="1" max="15" onChange={(e) => {
-
-              const range = e.target.value;
-              console.log(range)
-              dispatch({type:"SET_LINE_HEIGHT", payload:range})
-            }} defaultValue={0} />
+            <Slider
+              min="1"
+              max="15"
+              onChange={e => {
+                const range = e.target.value
+                console.log(range)
+                dispatch({ type: "SET_LINE_HEIGHT", payload: range })
+              }}
+              defaultValue={0}
+            />
           </div>
           <Select
             sx={{

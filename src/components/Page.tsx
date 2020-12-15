@@ -10,7 +10,7 @@ import {
 } from "draft-js"
 import createInlineToolbarPlugin from "draft-js-inline-toolbar-plugin"
 import createSideToolbarPlugin from "draft-js-side-toolbar-plugin"
-import {  useContext, useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import "draft-js-inline-toolbar-plugin/lib/plugin.css"
 import "draft-js-side-toolbar-plugin/lib/plugin.css"
 import { Dispatch, State } from "../context/state"
@@ -76,13 +76,16 @@ export default function Page({ index }) {
   }
 
   function tabKeyBindingFn(e: any): string | null {
-    const {hasCommandModifier} = KeyBindingUtil
+    const { hasCommandModifier } = KeyBindingUtil
     if (e.keyCode === 9) {
       return "tab"
     }
 
-    if (e.keyCode === 83 /* `S` key */ && hasCommandModifier(e) /* + `Ctrl` key */) {
-      return 'save';
+    if (
+      e.keyCode === 83 /* `S` key */ &&
+      hasCommandModifier(e) /* + `Ctrl` key */
+    ) {
+      return "save"
     }
 
     return getDefaultKeyBinding(e)
@@ -104,8 +107,8 @@ export default function Page({ index }) {
       return "handled"
     }
 
-    if(command === "save"){
-      document.getElementById('save').click();
+    if (command === "save") {
+      document.getElementById("save").click()
     }
 
     return "not-handled"
@@ -142,7 +145,7 @@ export default function Page({ index }) {
           borderRadius: "1px",
           fontSize: state?.fontSize || "16px",
           color: state?.color || "#21abcd",
-          lineHeight: state?.lineHeight || '1',
+          lineHeight: state?.lineHeight || "1",
         }}
       >
         <Editor
