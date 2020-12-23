@@ -1,20 +1,26 @@
-@media print{    
-    .no-print, .no-print *{
-        display: none !important;
-    }
-    @page { 
-        size: A4; /* DIN A4 standard, Europe */
-        margin:0;
-     }
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
 
-    #editor{
-        margin-top:0;
-    }
-    .no-border{
-        border:0px;
-    }
-    .no-padding{
-        padding:0px !important;
-    }
+  #editor {
+    margin-top: 0;
+  }
+  .no-border {
+    border: 0px;
+  }
+  .no-padding {
+    padding: 0px !important;
+  }
+}
 
+@media only screen and (max-width: 480px) {
+  .no-border {
+    border: 0px !important;
+  }
 }

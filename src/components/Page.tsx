@@ -125,10 +125,10 @@ export default function Page({ index }) {
       }}
       className="no-border"
       sx={{
-        width: "816px",
-        height: "1138px",
+        width: ["100%", "816px", "816px"],
+        height: ["841.89px", "1138px", "1138px"],
         backgroundColor: "#fff",
-        padding: "1.7rem",
+        padding: ["10px", "1.7rem"],
         position: "relative",
         border: "1px solid #ababab",
         pageBreakAfter: "always",
@@ -138,11 +138,12 @@ export default function Page({ index }) {
         onKeyUp={handleKeypress}
         onPaste={handleKeypress}
         ref={pageElement}
+        className="no-border"
         sx={{
           border: "1px solid #5c6274",
           height: "100%",
-          padding: "10px",
-          borderRadius: "1px",
+          padding: ["5px", "10px", "10px"],
+          borderRadius: "3px",
           fontSize: state?.fontSize || "16px",
           color: state?.color || "#21abcd",
           lineHeight: state?.lineHeight || "1",
