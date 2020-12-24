@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `FLMG`,
-    description: `Editor For Last Minute Guys (FLMG), Generates images or pdf from the text `,
+    description: `Editor to convert text to handwriting and exports as pdf or image `,
     author: `@vj_abishek`,
   },
   plugins: [

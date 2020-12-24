@@ -128,7 +128,7 @@ export default function Page({ index }) {
         width: ["100%", "210mm", "210mm"],
         minHeight: "297mm",
         backgroundColor: "#fff",
-        padding: "15mm",
+        padding: ["20px", "15mm", "15mm"],
         position: "relative",
         border: "1px solid #ababab",
       }}
