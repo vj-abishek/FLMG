@@ -7,7 +7,7 @@ const initialState = {
   fontFamily: "Homemade Apple",
   letterSpacing: 1,
   inkType: "#21abcd",
-  fontSize: "16px",
+  fontSize: "12pt",
   docName: "FLMG",
   page: [1],
   currentPage: 1,

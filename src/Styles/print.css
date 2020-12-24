@@ -1,13 +1,32 @@
+@page {
+  size: A4;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
 @media print {
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
   .no-print,
   .no-print * {
     display: none !important;
   }
-  @page {
-    size: A4;
-    margin: 0;
-  }
 
+  .every-page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always !important;
+  }
   #editor {
     margin-top: 0;
   }

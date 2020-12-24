@@ -123,15 +123,14 @@ export default function Page({ index }) {
       onClick={() => {
         EditorRef?.current.focus()
       }}
-      className="no-border"
+      className="no-border every-page"
       sx={{
-        width: ["100%", "816px", "816px"],
-        height: ["841.89px", "1138px", "1138px"],
+        width: ["100%", "210mm", "210mm"],
+        minHeight: "297mm",
         backgroundColor: "#fff",
-        padding: ["10px", "1.7rem"],
+        padding: "15mm",
         position: "relative",
         border: "1px solid #ababab",
-        pageBreakAfter: "always",
       }}
     >
       <div
@@ -141,10 +140,10 @@ export default function Page({ index }) {
         className="no-border"
         sx={{
           border: "1px solid #5c6274",
-          height: "100%",
+          height: "266mm",
           padding: ["5px", "10px", "10px"],
           borderRadius: "3px",
-          fontSize: state?.fontSize || "16px",
+          fontSize: state?.fontSize || "12pt",
           color: state?.color || "#21abcd",
           lineHeight: state?.lineHeight || "1",
         }}
