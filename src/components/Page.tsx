@@ -7,6 +7,7 @@ import {
   getDefaultKeyBinding,
   DraftHandleValue,
   KeyBindingUtil,
+  ContentState,
 } from "draft-js"
 import createInlineToolbarPlugin from "draft-js-inline-toolbar-plugin"
 import createSideToolbarPlugin from "draft-js-side-toolbar-plugin"
@@ -25,6 +26,7 @@ export default function Page({ index }) {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   )
+  const [oldState, setOldState] = useState("")
 
   const state = useContext(State)
   const dispatch = useContext(Dispatch)
@@ -113,7 +115,23 @@ export default function Page({ index }) {
 
     return "not-handled"
   }
+  if (state?.speechStatus) {
+    console.log(state.fromSpeech)
+    if (state.fromSpeech !== "" && oldState !== state.fromSpeech) {
+      setOldState(state.fromSpeech)
+      const text = ` ${state.fromSpeech}`
+      let currentState = editorState
+      let newContentState = Modifier.replaceText(
+        currentState.getCurrentContent(),
+        currentState.getSelection(),
+        text
+      )
 
+      setEditorState(() =>
+        EditorState.push(currentState, newContentState, "insert-characters")
+      )
+    }
+  }
   return (
     <div
       id={`page${index + 1}`}

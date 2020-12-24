@@ -10,7 +10,9 @@ const initialState = {
   fontSize: "12pt",
   docName: "FLMG",
   page: [1],
+  fromSpeech: '',
   currentPage: 1,
+  speechStatus: false,
   lineHeight: "1",
 }
 
@@ -47,6 +49,31 @@ function countReducer(state, { type, payload }) {
       }
     }
 
+    case 'SET_SPEECH_TO_TEXT': {
+      return {
+        ...state,
+        fromSpeech: payload,
+      }
+    }
+    case "APPEND_TXT": {
+      const final = state.fromSpeech + payload;
+      return {
+        ...state,
+        fromSpeech: final,
+      }
+    }
+    case 'SET_SPEECH_START': {
+      return {
+        ...state,
+        speechStatus: true,
+      }
+    }
+    case 'CLEAR_SPEECH_END': {
+      return {
+        ...state,
+        speechStatus: false,
+      }
+    }
     case "ADD_PAGE":
       return {
         ...state,
