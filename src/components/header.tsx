@@ -116,6 +116,7 @@ const Header = () => {
             left: "50%",
             borderRadius: "5px",
             top: "50%",
+            width: "300px",
             zIndex: "4",
             transform: "translate(-50%, -50%)",
             fontFamily: "Segoe UI,system-ui,-apple-system,sans-serif",
@@ -195,7 +196,7 @@ const Header = () => {
               flexDirection: "row",
             }}
           >
-            <a 
+            <a
               href="https://github.com/vj-abishek/FLMG/"
               title="source code"
               sx={{
@@ -210,8 +211,8 @@ const Header = () => {
                 alignItems: "center",
                 cursor: "pointer",
                 mr: "7px",
-                color:'#000',
-                textDecoration:'none',
+                color: "#000",
+                textDecoration: "none",
               }}
             >
               <svg
@@ -298,7 +299,7 @@ const Header = () => {
                   ml: "5px",
                 }}
               >
-              GitHub                 
+                GitHub
               </div>
             </a>
           </div>
@@ -397,6 +398,11 @@ const Header = () => {
               width: "150px",
             }}
             onChange={handleInputChange}
+            onKeyPress={(e: KeyboardEvent) => {
+              if (e.key === "Enter") {
+                setoverlay()
+              }
+            }}
           />
           <div
             id="save"
