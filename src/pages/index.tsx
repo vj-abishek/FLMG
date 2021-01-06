@@ -98,6 +98,7 @@ const IndexPage = () => {
 
       {/* Microphone button */}
       <div
+        className="no-print"
         onClick={handleMicClick}
         sx={{
           width: "50px",
